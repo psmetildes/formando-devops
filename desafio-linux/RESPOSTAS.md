@@ -244,7 +244,7 @@ sudo resize2fs /dev/data_vg/data_lv
 sudo pvcreate /dev/sdb2
 sudo vgcreate vg_backup /dev/sdb2
 sudo lvcreate -n lv_backup -L 4.99G vg_backup
-sudo mkfs.ext4 /dev/mapper/vg_backup-lv_backup 
+sudo mkfs.ext4 /dev/vg_backup/lv_backup 
 ```
 
 ### Criar partição XFS
