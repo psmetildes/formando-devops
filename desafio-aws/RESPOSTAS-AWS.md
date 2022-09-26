@@ -98,7 +98,7 @@ Source: Template aws-chellenge-template
 Criando Load Balancing:
 
 ```
-Create load Balancer -> Application Load Balancer 
+Create Load Balancer -> Application Load Balancer 
 
 Name: aws-challenge-lb 
 Scheme: internet-facing
@@ -143,4 +143,7 @@ inbound rules:
 Range Port: 81-8080 - Source: 0.0.0.0/0
 Range Port: ssh - Source: My IP
 Range Port: HTTP - Source: aws-challenge-sec-lb
+
+No Load Balancer foi alterado o security groups stack-controle-WebServerSecurityGroup-xxxx para aws-challenge-sec-lb.
+
 ```
