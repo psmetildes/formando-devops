@@ -46,7 +46,7 @@ colado a chave publica
 Acesso via ssh:
 
 ``` 
-ssh -i ~/.ssh/awschallenge.pem ec2-user@ec2-54-221-28-127.compute-1.amazonaws.com
+ssh -i ~/.ssh/awschallenge.pem ec2-user@ec2-54-161-182-90.compute-1.amazonaws.com
 ```
 
 2 - Alterado texto da página web:
