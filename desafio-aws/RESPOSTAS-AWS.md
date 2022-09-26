@@ -20,6 +20,7 @@ Para:
 
 Port Range: 80-8080 Source: 0.0.0.0/0
 ```
+![](https://github.com/psmetildes/formando-devops/blob/main/desafio-aws/imgens/sec_group.gif)
 
 ## 3 - EC2 Access
 
@@ -56,6 +57,9 @@ sudo vim /var/www/html/index.html
 <html><body><h1> Paulo Sergio - Formando ... <h1></body></html>
 ```
 
+![](https://github.com/psmetildes/formando-devops/blob/main/desafio-aws/imgens/ssh.gif)
+
+
 ## 4 - EC2 troubleshooting
 
 Ao utilizar o EC2 Instance Connect, não foi necessário desligar a instancia.
@@ -68,6 +72,9 @@ sudo systemctl status httpd
 sudo systemctl enable httpd
 ```
 
+![](https://github.com/psmetildes/formando-devops/blob/main/desafio-aws/imgens/apache2_enable.gif)
+
+
 ## 5 - Balanceamento
 
 Criando uma imagem:
@@ -77,6 +84,7 @@ No console AWS Incances -> selecionado Intancia -> Clicar em Actions -> Image ->
 
 Image Name: aws-chellenge-ami
 ```
+![](https://github.com/psmetildes/formando-devops/blob/main/desafio-aws/imgens/ami.gif)
 
 Crianto Template:
 
@@ -94,6 +102,9 @@ No User data foi removido o script, pois a imagem já contém o apache2 e a pers
 Launch instance from template 
 Source: Template aws-chellenge-template
 ``` 
+
+![](https://github.com/psmetildes/formando-devops/blob/main/desafio-aws/imgens/template.gif)
+
 
 Criando Load Balancing:
 
@@ -127,6 +138,7 @@ Registered targets:
 Add to registered -> Selecinado as Instancias 
 on porta: 80
 ```
+![](https://github.com/psmetildes/formando-devops/blob/main/desafio-aws/imgens/load_balancer.gif)
 
 ## 6 - Segurança
 
@@ -147,3 +159,4 @@ Range Port: HTTP - Source: aws-challenge-sec-lb
 No Load Balancer foi alterado o security groups stack-controle-WebServerSecurityGroup-xxxx para aws-challenge-sec-lb.
 
 ```
+![](https://github.com/psmetildes/formando-devops/blob/main/desafio-aws/imgens/sec_group_lb.gif)
