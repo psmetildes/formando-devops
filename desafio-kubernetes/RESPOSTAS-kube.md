@@ -299,8 +299,8 @@
     $ kubectl certificate approve jane
     $ kubectl get csr jane -o jsonpath='{.status.certificate}'| base64 -d > jane.crt
     $ kubectl create namespace frontend
-    $ kubectl create role jane --verb=list --resource=pods -n frontend
-    kubectl create rolebinding jane-binding --role=developer --user=myuser
+    $ kubectl create role role-jane --verb=list --resource=pods -n frontend
+    $ kubectl create rolebinding rolebinding-jane --role=role-jane --user=jane -n frontend
     $ kubectl config set-credentials jane --client-key=jane.key --client-certificate=jane.crt --embed-certs=true
     $ kubectl config set-context jane --cluster=kubernetes --user=jane
   ```
