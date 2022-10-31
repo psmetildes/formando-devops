@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+  name: data-pv
+  namespace: backend
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes: 
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Recycle
+  nfs:
+    path: /data
+    server: 192.168.1.9
+    readOnly: false

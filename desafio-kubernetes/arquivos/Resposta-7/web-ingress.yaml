@@ -1,0 +1,13 @@
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: labtux.com.br
+    http:
+      paths:
+        - pathType: Prefix
+          backend:
+            service:
+              name: pombo
+              port:
+                number: 80
+          path: /
