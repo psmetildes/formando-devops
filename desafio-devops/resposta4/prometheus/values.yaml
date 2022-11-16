@@ -13,18 +13,6 @@ prometheus:
             requests:
               storage: 5Gi
 
-additionalPrometheusRulesMap:
-  rule-name:
-    groups:
-    - name: PodInfoResquest
-      rules: 
-      - alert: PodInfoHighRequestLatency
-        expr: http_request_latencies_second{quantile="0.5"} > 3
-        for: 5m
-        annotations:
-          summary: "High request latency on {{ $labels.pod }}"
-          description: "{{ $labels.pod }} has a median request latency above 1s (current value: {{ $value }}s)"
-
 grafana:
   sidecar:
     datasources:
