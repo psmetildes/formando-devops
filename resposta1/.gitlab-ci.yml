@@ -1,0 +1,37 @@
+variables:
+  APP_NAME: "podinfo"
+  TRIVY_VERSION: "0.34.0"
+  TRIVY_BINARY: "https://github.com/aquasecurity/trivy/releases/download/v0.34.0/trivy_0.34.0_Linux-64bit.tar.gz"
+
+stages:
+  - test
+  - build
+
+docker-hadolint:
+  stage: test
+  image: hadolint/hadolint:latest-alpine
+  script:
+    - hadolint -t warning "${CI_PROJECT_DIR}/${APP_NAME}/Dockerfile"
+  rules:
+    - if: $CI_COMMIT_BRANCH
+      changes:
+        - ${APP_NAME}/Dockerfile
+
+docker-build:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - wget -q ${TRIVY_BINARY}
+    - tar xzf trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -C /usr/local/bin/
+  script:
+    - cd ${APP_NAME}
+    - docker build -t ${CI_REGISTRY_IMAGE}/${APP_NAME}:${CI_COMMIT_SHORT_SHA} .
+    - echo ${CI_GITLAB_TOKEN} | docker login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} --password-stdin
+    - trivy image --severity HIGH,CRITICAL --exit-code 1 --no-progress ${CI_REGISTRY_IMAGE}/${APP_NAME}:${CI_COMMIT_SHORT_SHA}
+    - docker push ${CI_REGISTRY_IMAGE}/${APP_NAME}:${CI_COMMIT_SHORT_SHA}
+  rules:
+    - if: $CI_COMMIT_BRANCH
+      changes:
+        - ${APP_NAME}/Dockerfile
